@@ -1,5 +1,5 @@
 #!/bin/bash
-bash /opt/canal/canal-adapter/bin/startup.sh
+bash /data/canal/canal-adapter/bin/startup.sh
 
 sleep 3
 

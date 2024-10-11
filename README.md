@@ -1,87 +1,28 @@
 # Canal Docker
 
-[![Build Status][build-status-image]][build-status]
-[![GitHub repo size][repo-size-image]][repository-url]
-![Latest commit][latest-commit]
-![GitHub release (latest by date)][latest-release]
-![License][license-image]
+clone from  [canal-docker](https://github.com/funnyzak/canal-docker)  of  [funnyzak](https://github.com/funnyzak)  
 
-[build-status-image]:  https://github.com/funnyzak/canal-docker/actions/workflows/build.yml/badge.svg
-[build-status]: https://github.com/funnyzak/canal-docker/actions
-[repo-size-image]: https://img.shields.io/github/repo-size/funnyzak/canal-docker?style=flat-square&logo=github&logoColor=white&label=size
-[repository-url]: https://github.com/funnyzak/canal-docker
-[license-image]: https://img.shields.io/github/license/funnyzak/canal-docker?style=flat-square&logo=github&logoColor=white&label=license
-[latest-commit]: https://img.shields.io/github/last-commit/funnyzak/canal-docker
-[latest-release]: https://img.shields.io/github/v/release/funnyzak/canal-docker
-
-Docker images for [canal](https://github.com/alibaba/canal). The images is based on Official [canal](https://github.com/alibaba/canal) repo.
+ Docker images for [canal](https://github.com/alibaba/canal). The images is based on Official [canal](https://github.com/alibaba/canal) repo.
 
  **Sync with the latest version of canal.**
 
 This repository contains the following images:
 
-- [canal-server](https://github.com/alibaba/canal/tree/master/server)
 - [canal-adapter](https://github.com/alibaba/canal/tree/master/client-adapter)
-- [canal-admin](https://github.com/alibaba/canal/tree/master/admin)
 
 ## Docker Images
 
 ### Canal Adapter
 
-[![Docker Stars](https://img.shields.io/docker/stars/funnyzak/canal-adapter.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/canal-adapter/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/funnyzak/canal-adapter.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/canal-adapter/)
-[![Docker Release Version](https://img.shields.io/docker/v/funnyzak/canal-adapter?sort=semver&label=latest)](https://hub.docker.com/r/funnyzak/canal-adapter/)
-[![Image Size](https://img.shields.io/docker/image-size/funnyzak/canal-adapter)](https://hub.docker.com/r/funnyzak/canal-adapter/)
 
-[Docker hub image: funnyzak/canal-adapter](https://hub.docker.com/r/funnyzak/canal-adapter)
 
-**Docker Pull Command**: `docker pull funnyzak/canal-adapter:latest`
+[Docker hub image: wanghongxing/canal-adapter](https://hub.docker.com/r/wanghongxing/canal-adapter)
 
-### Canal Server
+**Docker Pull Command**: `docker pull wanghongxing/canal-adapter:v1.1.7`
 
-[![Docker Stars](https://img.shields.io/docker/stars/funnyzak/canal-server.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/canal-server/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/funnyzak/canal-server.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/canal-server/)
-[![Docker Release Version](https://img.shields.io/docker/v/funnyzak/canal-server?sort=semver&label=latest)](https://hub.docker.com/r/funnyzak/canal-server/)
-[![Image Size](https://img.shields.io/docker/image-size/funnyzak/canal-server)](https://hub.docker.com/r/funnyzak/canal-server/)
-
-[Docker hub image: funnyzak/canal-server](https://hub.docker.com/r/funnyzak/canal-server)
-
-**Docker Pull Command**: `docker pull funnyzak/canal-server:latest`
-
-### Canal Admin
-
-[![Docker Stars](https://img.shields.io/docker/stars/funnyzak/canal-admin.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/canal-admin/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/funnyzak/canal-admin.svg?style=flat-square)](https://hub.docker.com/r/funnyzak/canal-admin/)
-[![Docker Release Version](https://img.shields.io/docker/v/funnyzak/canal-admin?sort=semver&label=latest)](https://hub.docker.com/r/funnyzak/canal-admin/)
-[![Image Size](https://img.shields.io/docker/image-size/funnyzak/canal-admin)](https://hub.docker.com/r/funnyzak/canal-admin/)
-
-[Docker hub image: funnyzak/canal-admin](https://hub.docker.com/r/funnyzak/canal-admin)
-
-**Docker Pull Command**: `docker pull funnyzak/canal-admin:latest`
+ 
 
 ## Usage
-
-### Docker
-
-```bash
-# canal server
-docker run -d --name canal-server \
-  -v /path/to/canal-server/conf:/opt/canal/canal-server/conf \
-  -v /path/to/canal-server/logs:/opt/canal/canal-server/logs \
-  funnyzak/canal-server:latest
-
-# canal adapter
-docker run -d --name canal-adapter \
-  -v /path/to/canal-adapter/conf:/opt/canal/canal-adapter/conf \
-  -v /path/to/canal-adapter/logs:/opt/canal/canal-adapter/logs \
-  funnyzak/canal-adapter:latest
-
-# canal admin
-docker run -d --name canal-admin \
-  -v /path/to/canal-admin/conf:/opt/canal/canal-admin/conf \
-  -v /path/to/canal-admin/logs:/opt/canal/canal-admin/logs \
-  funnyzak/canal-admin:latest
-```
 
 ### Compose
 
@@ -89,7 +30,7 @@ docker run -d --name canal-admin \
 version: '3.7'
 services:
   canal-server:
-    image: funnyzak/canal-server:latest
+    image: canal/canal-server:v1.1.7
     container_name: canal-server
     restart: on-failure
     environment:
@@ -112,7 +53,7 @@ services:
     depends_on:
       - mysql
   canal-adapter:
-    image: funnyzak/canal-adapter:latest
+    image: wanghongxing/canal-adapter:v1.1.7
     container_name: canal-adapter
     restart: on-failure
     volumes:
@@ -141,21 +82,14 @@ networks:
       name: my-network
 ```
 
-More details about configuration, please refer to [canal](https://github.com/alibaba/canal).
+ 
 
 ## Docker Build
 
 For building docker images, you can use the following command:
 
 ```bash
-# build canal server
-docker build \
---build-arg VCS_REF=`git rev-parse --short HEAD` \
---build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
---build-arg CANAL_COMPONENT_VERSION="1.1.6" \
---build-arg CANAL_COMPONENT_NAME="canal-server" \
---build-arg CANAL_DOWNLOAD_NAME="canal.deployer" \
--t funnyzak/canal-server .
+ 
 
 # build canal adapter
 docker build \
@@ -166,24 +100,7 @@ docker build \
 --build-arg CANAL_DOWNLOAD_NAME="canal.adapter" \
 -t funnyzak/canal-adapter .
 
-# build canal admin
-docker build \
---build-arg VCS_REF=`git rev-parse --short HEAD` \
---build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
---build-arg CANAL_COMPONENT_VERSION="1.1.6" \
---build-arg CANAL_COMPONENT_NAME="canal-admin" \
---build-arg CANAL_DOWNLOAD_NAME="canal.admin" \
--t funnyzak/canal-admin .
+ 
 ```
 
-## Contribution
-
-If you have any questions or suggestions, please feel free to submit an issue or pull request.
-
-<a href="https://github.com/funnyzak/canal-docker/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=funnyzak/canal-docker" />
-</a>
-
-## License
-
-MIT License © 2023 [funnyzak](https://github.com/funnyzak)
+ https://github.com/funnyzak)
